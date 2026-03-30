@@ -185,25 +185,32 @@ function clearOutputs() {
 function renderMath(element, texContent) {
   if (!element) return;
 
-  element.innerHTML = `\\[${texContent}\\]`;
-  queueMathTypeset();
+  const tex = String(texContent ?? "-");
+
+  if (!window.MathJax) {
+    element.textContent = tex;
+    return;
+  }
+
+  if (window.MathJax.typesetClear) {
+    window.MathJax.typesetClear([element]);
+  }
+
+  element.innerHTML = `\\[${tex}\\]`;
+
+  queueMathTypeset(element);
 }
 
-let mathTypesetQueued = false;
+let mathTypesetPromise = Promise.resolve();
 
-function queueMathTypeset() {
-  if (mathTypesetQueued) return;
-  mathTypesetQueued = true;
+function queueMathTypeset(element) {
+  if (!window.MathJax || !window.MathJax.typesetPromise) return;
 
-  requestAnimationFrame(() => {
-    mathTypesetQueued = false;
-
-    if (!window.MathJax || !window.MathJax.typesetPromise) return;
-
-    window.MathJax.typesetPromise().catch((error) => {
+  mathTypesetPromise = mathTypesetPromise
+    .then(() => window.MathJax.typesetPromise([element]))
+    .catch((error) => {
       console.error("MathJax typeset 실패:", error);
     });
-  });
 }
 
 if (!els.canvas) {
