@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+  <title>Jones Polynomial calculator</title>
+  <link rel="icon" type="image/svg+xml" href="./TrefoilKnot_01.svg">
+  <link rel="stylesheet" href="./styles.css" />
+
+<script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['\\(', '\\)'], ['$', '$']],
+      displayMath: [['\\[', '\\]'], ['$$', '$$']]
+    },
+    chtml: {
+      displayAlign: "left",
+      displayIndent: "0",
+      linebreaks: {
+        automatic: true,
+        width: "container"
+      }
+    }
+  };
+</script>
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"
+></script>
+</head>
+<body>
+  <div id="app">
+    <header class="app-header">
+      <h1>Jones Polynomial calculator</h1>
+    </header>
+
+    <main class="app-main">
+      <section class="workspace">
+        <div class="toolbar-group">
+          <div class="toolbar toolbar-modes" aria-label="편집 모드">
+            <button
+              id="mode-draw"
+              type="button"
+              class="tool-button is-active"
+              data-mode="draw"
+              aria-pressed="true"
+            >
+              그리기
+            </button>
+            <button
+              id="mode-edit"
+              type="button"
+              class="tool-button"
+              data-mode="edit"
+              aria-pressed="false"
+            >
+              편집
+            </button>
+            <button
+              id="mode-crossing"
+              type="button"
+              class="tool-button"
+              data-mode="crossing"
+              aria-pressed="false"
+            >
+              교차 지정
+            </button>
+          </div>
+
+          <div class="toolbar toolbar-actions" aria-label="기타 동작">
+            <button id="clear-canvas" type="button" class="tool-button">
+              전체 지우기
+            </button>
+            <button id="load-example" type="button" class="tool-button">
+              예제 불러오기
+            </button>
+          </div>
+        </div>
+
+        <div class="workspace-body">
+          <section class="canvas-panel" aria-label="그리기 영역">
+            <div class="canvas-wrap">
+              <canvas id="editor-canvas" width="960" height="720"></canvas>
+            </div>
+          </section>
+
+          <aside class="result-sidebar" aria-label="계산 결과">
+            <article class="result-card">
+              <h2>Writhe</h2>
+              <div id="writhe-output" class="math-output">\( ? \)</div>
+            </article>
+
+            <article class="result-card">
+              <h2>Bracket Polynomial</h2>
+              <div id="bracket-output" class="math-output">\( - \)</div>
+            </article>
+
+            <article class="result-card">
+              <h2>Jones Polynomial</h2>
+              <div id="jones-output" class="math-output">\( - \)</div>
+            </article>
+          </aside>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script type="module" src="./src/main.js"></script>
+</body>
+</html>
