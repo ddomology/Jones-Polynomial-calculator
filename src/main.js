@@ -9,10 +9,10 @@ const els = {
 
   clearCanvas: document.getElementById("clear-canvas"),
   loadExample: document.getElementById("load-example"),
-  exportKnot: document.getElementById("export-knot"),
 
   writheOutput: document.getElementById("writhe-output"),
   bracketOutput: document.getElementById("bracket-output"),
+  jonesOutput: document.getElementById("jones-output"),
 };
 
 const state = {
