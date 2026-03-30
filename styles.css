@@ -120,12 +120,11 @@ button {
 
 .canvas-panel {
   min-width: 0;
-  overflow-x: auto;
 }
 
 .canvas-wrap {
-  width: fit-content;
-  max-width: 100%;
+  width: 100%;
+  max-width: 988px; /* 960 + padding 여유 */
   background: #ffffff;
   border: 1px solid #dbe1ea;
   border-radius: 16px;
@@ -135,8 +134,9 @@ button {
 
 #editor-canvas {
   display: block;
-  width: 960px;
-  height: 720px;
+  width: min(100%, 960px);
+  height: auto;
+  aspect-ratio: 960 / 720;
   background: #ffffff;
   border: 1px solid #d1d5db;
   border-radius: 12px;
